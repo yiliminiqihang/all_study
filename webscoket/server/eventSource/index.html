@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script>
+        (function () {
+            // EventSource = new EventSource(url, configuration);
+            // url: 一个USVString ，它代表远程资源的位置
+            // configuration: 为配置新连接提供选项。可选项; withCredentials，默认为 false，指示 CORS 是否应包含凭据(credentials) 。
+            
+            // ventSource.onerror
+            // 是一个 EventHandler，当发生错误时被调用，并且在此对象上派发 error 事件。
+            
+            // EventSource.onmessage
+            // 是一个 EventHandler，当收到一个 message 事件，即消息来自源头时被调用。
+            
+            // EventSource.onopen
+            // 是一个 EventHandler，当收到一个 open 事件，即连接刚打开时被调用。
+            
+            // EventSource.readyState 只读
+            // 一个 unsigned short 值，代表连接状态。可能值是 CONNECTING (0), OPEN (1), 或者 CLOSED (2)。
+            
+            // EventSource.url 只读
+            // 一个DOMString，代表事件源的 URL。
+            var evtSource = new EventSource('/eventSource',{
+                withCredentials: true
+            });
+            const container = document.querySelector('#container')
+            evtSource.onmessage = function (e) {
+                console.log(e.data);
+                container.innerHTML = e.data;
+            }
+            evtSource.onerror = function (err) {
+                console.log(err);
+            }
+        })()
+    </script>
+</body>
+
+</html>
